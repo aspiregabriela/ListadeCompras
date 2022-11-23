@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ListadeCompras.View.Listagem">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Somar" Clicked="ToolbarItem_Clicked"/>
+        <ToolbarItem Text="Novo" Clicked="ToolbarItem_Clicked_1"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+
+            <SearchBar x:Name="txt_busca" 
+                       Placeholder="Qual produto?" 
+                       TextChanged="txt_busca_TextChanged"/>
+
+            <RefreshView x:Name="ref_carregando" IsRefreshing="True">
+                <ListView x:Name="lst_produtos" ItemSelected="lst_produtos_ItemSelected">
+                    <ListView.Header>
+                        <Grid RowDefinitions="Auto"
+                              ColumnDefinitions="*, Auto, Auto">
+
+                            <Label Grid.Row="0" Grid.Column="0" Text="Descrição" FontAttributes="Bold" FontSize="Medium" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="Qnt" FontAttributes="Bold" FontSize="Medium" />
+                            <Label Grid.Row="0" Grid.Column="2" Text="Preço" FontAttributes="Bold" FontSize="Medium" />
+
+                        </Grid>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="Remover" Clicked="MenuItem_Clicked"/>
+                                </ViewCell.ContextActions>
+                                <Grid RowDefinitions="Auto"
+                                      ColumnDefinitions="*, Auto, Auto">
+
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Descricao}" Margin="10"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Quantidade}" Margin="10"/>
+                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding Preco}" Margin="10" />
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
